@@ -68,7 +68,6 @@ def visualize_age_voice_phishing(data):
     for _, row in latest_year_data.iterrows():
         plt.text(row['연도'], row['피해건수'], f"{row['피해건수']:,}", 
                     fontsize=10, va='center')
-    plt.tight_layout()
     
     # 시각화 자료 저장
     save_name = 'age_voice_phishing_visualization.png'
