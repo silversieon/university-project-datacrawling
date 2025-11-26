@@ -15,7 +15,6 @@ base_url = "https://api.odcloud.kr/api"
 endpoint = "/15091224/v1/uddi:74e5825b-ab3d-418e-9af9-c35429bcffb4"
 request_url = base_url + endpoint
 
-# 데이터 수집
 def fetch_regional_data():
     
     headers = {"Authorization": service_key}
@@ -44,8 +43,7 @@ def fetch_regional_data():
     except Exception as e:
         return None
 
-# 데이터 전처리 및 시각화
-def visualize_regional_damage(df):
+def visualize_regional_voice_phishing(df):
     
     system_name = platform.system()
     if system_name == "Darwin": plt.rc("font", family="AppleGothic")
@@ -100,10 +98,10 @@ def visualize_regional_damage(df):
     print(f"그래프 저장 완료: {save_name}")
     plt.show()
 
-# 메인
-if __name__ == "__main__":
-    df = fetch_regional_data()
+def regional_voice_phishing():
+    data = fetch_regional_data()
     
-    if df is not None:
-        print(df.head())
-        visualize_regional_damage(df)
+    if data is not None:
+        visualize_regional_voice_phishing(data)
+    else:
+        print("지역별 보이스피싱 통계 데이터를 불러오지 못했습니다.")

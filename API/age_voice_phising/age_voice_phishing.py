@@ -15,7 +15,6 @@ base_url = "https://api.odcloud.kr/api"
 endpoint = "/15091221/v1/uddi:e359f7f2-b59c-402f-9818-8d027df1a426"
 request_url = base_url + endpoint
 
-# 데이터 수집 
 def fetch_data():
     params = {
         "serviceKey": service_key,
