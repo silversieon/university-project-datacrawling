@@ -56,6 +56,7 @@ def visualize_regional_voice_phishing(data):
 
     # [그래프 그리기] 지역별/연도별 히트맵
     sns.heatmap(data, annot=True, fmt="d", cmap="Blues", linewidths=.10, linecolor="lightgray")
+    plt.title('지역별 보이스피싱 피해 통계 히트맵', fontsize=18)
     
     # 시각화 자료 저장
     save_name = "regional_voice_phishing_visualization.png"
