@@ -6,8 +6,3 @@ import os
 import platform
 import requests
 from dotenv import load_dotenv
-
-st.set_page_config(
-    page_title="사이버 금융범죄 분석",
-    layout="wide"
-)
