@@ -59,9 +59,12 @@ def visualize_regional_voice_phishing(data):
     plt.title('지역별 보이스피싱 피해 통계 히트맵', fontsize=18)
     
     # 시각화 자료 저장
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    
     save_name = "regional_voice_phishing_visualization.png"
-    plt.savefig(save_name, dpi=300)
-    print(f"지역별/연도별 시각화 히트맵 저장 완료: {save_name}")
+    save_path = os.path.join(current_dir, save_name)
+    plt.savefig(save_path, dpi=300)
+    print(f"지역별/연도별 시각화 히트맵 저장 완료: {save_path}")
 
 def regional_voice_phishing():
     data = request_regional_api()

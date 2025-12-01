@@ -70,9 +70,12 @@ def visualize_age_voice_phishing(data):
                     fontsize=10, va='center')
     
     # 시각화 자료 저장
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
     save_name = 'age_voice_phishing_visualization.png'
-    plt.savefig(save_name, dpi=300)
-    print(f"연령대별/연도별 시각화 라인차트 저장 완료: {save_name}")
+    save_path = os.path.join(current_dir, save_name)
+    plt.savefig(save_path, dpi=300)
+    print(f"연령대별/연도별 시각화 라인차트 저장 완료: {save_path}")
 
 def age_voice_phishing():
     data = request_age_api()

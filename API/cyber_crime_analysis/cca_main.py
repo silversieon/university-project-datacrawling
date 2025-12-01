@@ -50,12 +50,11 @@ def preprocess_data(df):
     if "구분" in df.columns:
         df = df[df["구분"] == "발생건수"].copy()
     
-    # 분석에 필요한 컬럼만 선택 (금융범죄 관련)
+    # 분석에 필요한 금융범죄 관련 컬럼만 선택
     target_cols = ["연도", "사이버금융범죄_피싱", "사이버금융범죄_파밍", 
                    "사이버금융범죄_스미싱", "사이버금융범죄_메모리해킹", 
                    "사이버금융범죄_메신저이용사기", "사이버금융범죄_몸캠피싱"]
     
-    # 실제 데이터프레임에 존재하는 컬럼만 교집합으로 선택
     valid_cols = [col for col in target_cols if col in df.columns]
     df_filtered = df[valid_cols].set_index("연도")
     
@@ -70,8 +69,8 @@ def visualize_data(df):
     system_name = platform.system()
     if system_name == "Darwin":
         plt.rc("font", family="AppleGothic")
-    elif system_name == "Windows":
-        plt.rc("font", family="Malgun Gothic")
+    else:
+        plt.rc("font", family="NanumGothic")
     
     plt.rc("axes", unicode_minus=False) # 마이너스 기호 깨짐 방지
 
@@ -80,19 +79,17 @@ def visualize_data(df):
     
     # [그래프 1] 연도별 전체 사이버 금융범죄 발생 총합 
     df["total"] = df.sum(axis=1) # 연도별 합계 계산
-    sns.lineplot(data=df, x=df.index, y="total", marker="o", ax=axes[0], color="red", linewidth=2.5)
+    sns.lineplot(data=df, x=df.index, y="total", marker="o", ax=axes[0], color="#FF6B6B", linewidth=2.5)
     axes[0].set_title("연도별 사이버 금융범죄 발생 추이 (총합)", fontsize=15, pad=15)
     axes[0].set_ylabel("발생 건수")
     axes[0].grid(True, linestyle="--", alpha=0.6)
     
-    # 값 표시 (Annotation)
     for x, y in zip(df.index, df["total"]):
         axes[0].text(x, y + (y*0.02), f"{int(y):,}", ha="center", fontsize=10)
 
     # [그래프 2] 범죄 유형별 상세 비교 
-    # 총합 컬럼 제외하고 그리기
     df_details = df.drop(columns=["total"])
-    sns.lineplot(data=df_details, markers=True, dashes=False, ax=axes[1], linewidth=2)
+    sns.lineplot(data=df_details, markers=True, dashes=False, ax=axes[1], linewidth=2, palette="cool")
     axes[1].set_title("유형별 사이버 금융범죄 상세 추이", fontsize=15, pad=15)
     axes[1].set_ylabel("발생 건수")
     axes[1].legend(title="범죄 유형", bbox_to_anchor=(1.05, 1), loc="upper left")
@@ -107,16 +104,16 @@ def visualize_data(df):
 
 # 메인
 if __name__ == "__main__":
-    # 1. 데이터 수집 및 전처리
+    # 데이터 수집 및 전처리
     raw_df = fetch_cyber_crime_data()
     
     if raw_df is not None:
-        # 2. 전처리
+        # 전처리
         clean_df = preprocess_data(raw_df)
         
-        # 3. 데이터 확인 (터미널 출력)
+        # 데이터 확인 (터미널 출력)
         print("\n[전처리된 데이터]")
         print(clean_df.head())
         
-        # 4. 시각화
+        # 시각화
         visualize_data(clean_df)
