@@ -60,10 +60,12 @@ def visualize_property_crime(data):
     plt.grid(axis='y', alpha=0.5)
     
     # 시각화 자료 저장
-    save_name = "property_crime_visualization.png"
-    plt.savefig(save_name, dpi=300)
-    print(f"재산범죄 중 사기 피해 비율 확인 지표 저장 완료: {save_name}")
+    current_dir = os.path.dirname(os.path.abspath(__file__))
 
+    save_name = "property_crime_visualization.png"
+    save_path = os.path.join(current_dir, save_name)
+    plt.savefig(save_path, dpi=300)
+    print(f"재산범죄 중 사기 피해 비율 확인 지표 저장 완료: {save_path}")
 def property_crime():
     data = request_property_crime_api()
     if data is not None:

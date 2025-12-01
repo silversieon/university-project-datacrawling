@@ -73,9 +73,12 @@ def visualize_fraud_damage(data):
     plt.grid(axis='y', alpha=0.5)
     
     # 시각화 자료 저장
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
     save_name = "fraud_damage_visualization.png"
-    plt.savefig(save_name, dpi=300)
-    print(f"사기 피해 유형 중 보이스피싱 비율 확인 지표 저장 완료: {save_name}")
+    save_path = os.path.join(current_dir, save_name)
+    plt.savefig(save_path, dpi=300)
+    print(f"사기 피해 유형 중 보이스피싱 비율 확인 지표 저장 완료: {save_path}")
 
 def fraud_damage():
     data = request_fraud_damage_api()
