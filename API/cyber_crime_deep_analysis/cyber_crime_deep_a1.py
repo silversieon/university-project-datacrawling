@@ -66,6 +66,7 @@ def visualize_property_crime(data):
     save_path = os.path.join(current_dir, save_name)
     plt.savefig(save_path, dpi=300)
     print(f"재산범죄 중 사기 피해 비율 확인 지표 저장 완료: {save_path}")
+    
 def property_crime():
     data = request_property_crime_api()
     if data is not None:

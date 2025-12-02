@@ -53,8 +53,11 @@ st.sidebar.caption("Client-Server Architecture Ver.")
 # 메인 페이지
 if menu == "1. 프로젝트 개요":
     st.title("디지털 시대로 인한 사이버 금융 범죄 문제")
-    st.markdown("주제: 데이터 기반 범죄 분석 및 위험도 예측 시스템")
-    st.image("https://images.unsplash.com/photo-1550751827-4bd374c3f58b", caption="Digital Financial Crime", use_container_width=True)
+    st.markdown("""
+                최근 캄보디아, 필리핀 등 해외 거점 범죄 조직에 의한 보이스피싱과 메신저 사기가 급증하고 있습니다. 
+                특히 인터넷 뱅킹의 주 이용 수단이 PC에서 스마트폰으로 완전히 이동하면서, 범죄 수법은 단순한 '전화'를 넘어 '악성 앱 설치', '메신저 피싱' 등 기술적으로 고도화되었습니다. 
+                이에 따라 획일적인 차단 방식이 아닌, 데이터에 근거한 정밀한 분석과 예방책이 필요해졌습니다.
+                """)
 
 elif menu == "2. 원인 분석 (기기/플랫폼)":
     st.title("원인 분석: 모바일로의 대이동")
