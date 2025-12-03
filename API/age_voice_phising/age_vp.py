@@ -75,6 +75,7 @@ def visualize_age_voice_phishing(data):
     save_name = 'age_voice_phishing_visualization.png'
     save_path = os.path.join(current_dir, save_name)
     plt.savefig(save_path, dpi=300)
+    plt.close()
     print(f"연령대별/연도별 시각화 라인차트 저장 완료: {save_path}")
 
 def age_voice_phishing():

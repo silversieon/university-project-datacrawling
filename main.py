@@ -36,8 +36,8 @@ def root():
 
 def run_etl_pipeline():
     try:
-        regional_voice_phishing()
         age_voice_phishing()
+        regional_voice_phishing()
         property_crime()
         fraud_damage()
         online_activity()
