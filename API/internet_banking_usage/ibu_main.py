@@ -84,7 +84,7 @@ def visualize(df_p1, df_p2):
 
 
 def internet_banking_usage_analysis():
-    csv_file = "인터넷뱅킹이용률및이용기기_20251124224154.csv"
+    csv_file = "internet_banking.csv"
     
     df_phase1, df_phase2 = load_and_split_data(csv_file)
     
