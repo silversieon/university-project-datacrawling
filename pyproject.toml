@@ -6,6 +6,9 @@ readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
     "beautifulsoup4>=4.14.3",
+    "konlpy>=0.6.0",
+    "matplotlib>=3.9.4",
     "pandas>=2.3.3",
     "requests>=2.32.5",
+    "scikit-learn>=1.6.1",
 ]
