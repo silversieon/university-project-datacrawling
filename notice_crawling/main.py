@@ -6,7 +6,7 @@ import random
 import re
 
 BASE_URL = "https://www.skuniv.ac.kr"
-START_YEAR = 2024  # 크롤링을 시작할 연도
+START_YEAR = 2024 #크롤링을 시작할 연도
 FILE_NAME = f"skuniv_notice_{START_YEAR}_2025.csv"
 
 HEADERS = {
