@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 import pandas as pd
 import time
@@ -17,8 +18,6 @@ def load_current_page(wd):
 
     for row in rows:
         tds = row.find_all("td")
-        if len(tds) < 2:
-            continue
 
         number = tds[0].get_text(strip=True)
         title = tds[1].get_text(strip=True)
@@ -31,7 +30,7 @@ def load_current_page(wd):
     return results
 
 def click_next_page(wd):
-    spans = wd.find_elements("css selector", "div.pager-wrap span")
+    spans = wd.find_elements(By.CSS_SELECTOR, "div.pager-wrap span")
 
     for span in spans:
         if span.text.strip() == ">":
@@ -43,7 +42,7 @@ def click_next_page(wd):
 def skuniv_recruitment_info_crawling():
     wd = webdriver.Chrome()
     wd.get("https://job.skuniv.ac.kr/recruit-skuniv/")
-    time.sleep(3)
+    time.sleep(2)
     
     all_results = []
     page = 1
