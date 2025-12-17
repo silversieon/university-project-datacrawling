@@ -3,9 +3,15 @@ name = "university-project-datacrawling-2"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
+package-mode = false
 requires-python = ">=3.9"
 dependencies = [
     "beautifulsoup4>=4.14.3",
+    "konlpy>=0.6.0",
+    "matplotlib>=3.9.4",
     "pandas>=2.3.3",
     "requests>=2.32.5",
+    "scikit-learn>=1.6.1",
+    "selenium>=4.36.0",
+    "streamlit>=1.50.0",
 ]

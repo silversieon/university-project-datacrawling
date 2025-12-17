@@ -6,7 +6,7 @@ import random
 import re
 
 BASE_URL = "https://www.skuniv.ac.kr"
-START_YEAR = 2024  # 크롤링을 시작할 연도
+START_YEAR = 2024 #크롤링을 시작할 연도
 FILE_NAME = f"skuniv_notice_{START_YEAR}_2025.csv"
 
 HEADERS = {
@@ -31,47 +31,43 @@ def crawl_notices():
                 break
 
             soup = BeautifulSoup(response.text, 'html.parser')
-            rows = soup.select('table.board-list-table tbody tr')
+            board = soup.select_one('div.board-list')
 
-            if not rows:
+            if not board:
                 break
+            
+            items = board.select('div.board-list-item:not(.is-notice)')
+            if not items:
+                break
+            
+            for item in items:
+                title_wrap = item.select_one(".post-title-wrap a")
+                if not title_wrap:
+                    continue
 
-            for row in rows:
-                info_divs = row.select('td.post-info .post-info-wrap > div')
+                title = title_wrap.get_text(strip=True)
+
+                info_divs = item.select(".post-info-wrap > div")
                 
                 date_text = "0000-00-00"
                 view_count = "0"
 
                 if len(info_divs) >= 3:
-                    date_text = info_divs[2].text.strip()
+                    date_text = info_divs[2].get_text(strip=True)
+
+                if len(info_divs) >= 5:
+                    view = info_divs[-1].get_text(strip=True)
+                    view_count = re.sub(r'[^0-9]', '', view)
                 
                 try:
                     year = int(date_text.split('-')[0])
                 except:
                     year = 9999 
-
-                is_pinned = "is-notice" in row.get('class', [])
                 
-                if not is_pinned and year < START_YEAR:
+                if year < START_YEAR:
                     print(f"크롤링을 종료합니다.")
                     is_crawling = False
                     break
-                
-                if year < START_YEAR:
-                    continue
-
-                if info_divs:
-                    raw_view = info_divs[-1].text.strip()
-                    view_count = re.sub(r'[^0-9]', '', raw_view)
-
-                title_tag = row.select_one('td.post-title a')
-                if not title_tag:
-                    continue
-
-                title = title_tag.text.strip()
-                link = title_tag['href']
-                if link.startswith('/'):
-                    link = BASE_URL + link
 
                 all_data.append({
                     '작성일': date_text,
