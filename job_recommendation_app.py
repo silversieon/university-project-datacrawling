@@ -47,12 +47,12 @@ if df is not None:
         
         if len(filtered_df) > 0:
             for idx, row in filtered_df.iterrows():
-                with st.expander(f"📌 [{row["number"]}] {row["title"][:50]}"):
-                    st.write("**제목:**", row["title"])
-                    st.write("**번호:**", row["number"])
-                    st.write("**링크:**", f"[자세히 보기]({row["url"]})")
+                with st.expander(f"📌 [{row['number']}] {str(row.get('title') or '')[:50]}"):
+                    st.write("**제목:**", row['title'])
+                    st.write("**번호:**", row['number'])
+                    st.write("**링크:**", f"[자세히 보기]({row['url']})")
                     st.write("**내용:**")
-                    st.text(row["content"][:500] + "..." if len(str(row["content"])) > 500 else row["content"])
+                    st.text(row['content'][:500] + "..." if len(str(row['content'])) > 500 else row['content'])
         else:
             st.info("검색 결과가 없습니다.")
     
@@ -101,9 +101,7 @@ if df is not None:
                 st.success(f"✅ {len(recommendations)}개의 맞춤 공고를 찾았습니다!")
                 
                 for idx, row in recommendations.iterrows():
-                    similarity_percentage = row["similarity_score"] * 100
-                    
-                    # 유사도에 따른 이모지
+                    similarity_percentage = row['similarity_score'] * 100
                     if similarity_percentage > 30:
                         emoji = "🔥"
                     elif similarity_percentage > 20:
@@ -113,16 +111,13 @@ if df is not None:
                     else:
                         emoji = "📌"
                     
-                    with st.expander(f"{emoji} [{row["number"]}] {row["title"][:50]} - 매칭도: {similarity_percentage:.1f}%"):
-                        # 진행률 바로 매칭도 표시
-                        st.progress(min(row["similarity_score"], 1.0))
-                        
-                        st.write("**제목:**", row["title"])
-                        st.write("**번호:**", row["number"])
-                        st.write("**링크:**", f"[자세히 보기]({row["url"]})")
+                    with st.expander(f"{emoji} [{row['number']}] {str(row.get('title') or '')[:50]} - 매칭도: {similarity_percentage:.1f}%"):
+                        st.progress(min(row['similarity_score'], 1.0))
+                        st.write("**제목:**", row['title'])
+                        st.write("**번호:**", row['number'])
+                        st.write("**링크:**", f"[자세히 보기]({row['url']})")
                         st.write("**내용:**")
-                        st.text(row["content"][:500] + "..." if len(str(row["content"])) > 500 else row["content"])
-                        
+                        st.text(row['content'][:500] + "..." if len(str(row['content'])) > 500 else row['content'])
                         if similarity_percentage > 10:
                             st.info(f"💡 이 공고는 입력하신 정보와 {similarity_percentage:.1f}% 일치합니다.")
             else:
